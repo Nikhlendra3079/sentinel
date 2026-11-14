@@ -1,0 +1,79 @@
+{
+  "environment": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "processor": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD"
+  },
+  "configuration": {
+    "iterations": 20000,
+    "key_count": 1000,
+    "concurrency": 8,
+    "warmup_requests_per_case": 1000,
+    "redis_included": false
+  },
+  "results": [
+    {
+      "name": "token_bucket",
+      "backend": "in_process",
+      "requests": 20000,
+      "concurrency": 8,
+      "elapsed_seconds": 0.319856,
+      "throughput_requests_per_second": 62528.14,
+      "latency_ms": {
+        "p50": 0.0023,
+        "p95": 0.0048,
+        "p99": 0.008,
+        "mean": 0.0464
+      },
+      "allowed": 20000,
+      "errors": 0,
+      "key_count_configured": 1000,
+      "state_count_retained": 2000,
+      "lock_count_retained": 2000
+    },
+    {
+      "name": "fixed_window",
+      "backend": "in_process",
+      "requests": 20000,
+      "concurrency": 8,
+      "elapsed_seconds": 0.450761,
+      "throughput_requests_per_second": 44369.42,
+      "latency_ms": {
+        "p50": 0.0025,
+        "p95": 0.219,
+        "p99": 0.3029,
+        "mean": 0.084
+      },
+      "allowed": 20000,
+      "errors": 0,
+      "key_count_configured": 1000,
+      "state_count_retained": 2000,
+      "lock_count_retained": 2000
+    },
+    {
+      "name": "sliding_window",
+      "backend": "in_process",
+      "requests": 20000,
+      "concurrency": 8,
+      "elapsed_seconds": 0.35503,
+      "throughput_requests_per_second": 56333.27,
+      "latency_ms": {
+        "p50": 0.003,
+        "p95": 0.0054,
+        "p99": 0.008,
+        "mean": 0.0358
+      },
+      "allowed": 20000,
+      "errors": 0,
+      "key_count_configured": 1000,
+      "state_count_retained": 2000,
+      "lock_count_retained": 2000
+    }
+  ],
+  "notes": [
+    "Microbenchmark results are environment-specific; compare only under controlled conditions.",
+    "In-process algorithms use one hot key and include Python lock contention.",
+    "Redis results include client, network, Redis scheduling, and Lua execution latency.",
+    "This benchmark is not an HTTP end-to-end load test."
+  ]
+}
